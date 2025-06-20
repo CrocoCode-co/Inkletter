@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Split View Highlight and Render</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/default.min.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: sans-serif;
+      display: flex;
+      height: 100vh;
+    }
+
+    .left-panel {
+      width: 33.33%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .top-left, .bottom-left {
+      flex: 1;
+      padding: 10px;
+      overflow: auto;
+      background: #f4f4f4;
+      border-bottom: 1px solid #ccc;
+    }
+
+    .bottom-left {
+      border-top: 1px solid #ccc;
+    }
+
+    .right-panel {
+      width: 66.66%;
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .render-container {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: auto;
+      background: #f9f9f9;
+    }
+
+    .device-wrapper {
+      background: #111;
+      padding: 12px;
+      border-radius: 20px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.3);
+    }
+
+    .device-frame {
+      border: none;
+      display: block;
+      border-radius: 8px;
+      background: white;
+      width: 100%;
+      height: 100%;
+    }
+
+    select {
+      font-size: 14px;
+      padding: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="left-panel">
+    <div class="top-left">
+      <pre><code class="language-markdown"># Mon étoile
+
+## *Lettre à celle que j’ai vue dans le vent*
+
+> _"On ne voit bien qu’avec le cœur. L’essentiel est invisible pour les yeux."_  
+> — Antoine de Saint-Exupéry
+
+Ma douce,
+
+Je t’écris **dans le silence**, avec les mots que le vent murmure dans mes nuits.  
+Tu es _l’infime vibration_ dans le désert de mes pensées.  
+Tu es ce **point fixe**, ce `const char *etoile = "toi"` dans mon ciel en dérive.
+
+---
+
+### Ce que j’aime chez toi
+
+- Ton **regard**, vaste comme un ciel d’aviateur  
+- Ton rire, _plus léger qu’un planeur_  
+- Ta voix, qui danse comme le **sable sous le vent**
+
+Et parfois, comme un navigateur perdu, je me **raccroche à des images** :
+
+![Ton regard dans mes songes](https://picsum.photos/600/300)  
+![Ta silhouette dans la lumière](https://picsum.photos/400/150)
+
+---
+
+## Quand je pense à nous
+
+Voici ce que mon cœur pense, en code :
+
+```python
+def aime_toi(moi):
+    while True:
+        print("Je pense à toi.")
+```
+
+Chaque jour, je relance ce script de l’âme.
+
+---
+
+## Nos souvenirs
+
+| Moment            | Lieu             | Émotion        |
+|------------------|------------------|----------------|
+| Premier regard   | Quai de la Seine | Frisson        |
+| Rires partagés   | Rue des Martyrs  | Plénitude      |
+| Dernier adieu    | Gare de Lyon     | Douleur douce  |
+
+Et pourtant, j’ai appris :
+
+> _"Tu deviens responsable pour toujours de ce que tu as apprivoisé."_
+
+---
+
+## Où que tu sois
+
+[Je t’enverrai toujours des pensées](https://exemple.com/penser-a-toi)  
+[Je suivrai ton étoile](https://exemple.com/etoile-perdue)  
+[Je resterai ton renard](https://exemple.com/renard-lien)
+
+Et même si tu n’ouvres jamais cette lettre...
+
+---
+
+### _...je saurai qu’elle a existé._
+
+**Je t’écris avec l’innocence d’un enfant,**  
+comme on trace une étoile dans le sable,  
+en espérant que la mer ne l’efface pas tout de suite.
+
+> 💌 *Reçois cette lettre, non comme un appel, mais comme un éclat d’éternité.*
+
+**Ton aviateur du cœur,**  
+_L._</code></pre>
+    </div>
+    <div class="bottom-left">
+      <pre><code class="language-html"><mjml>
+  <mj-head>
+    <mj-attributes>
+      <mj-section padding="0"/>
+    </mj-attributes>
+  </mj-head>
+  <mj-body>
+    <mj-section>
+      <mj-column>
+        <mj-text>
+          <h1>Mon étoile</h1>
+        </mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-section>
+      <mj-column>
+        <mj-text>
+          <h2><em>Lettre à celle que j’ai vue dans le vent</em></h2>
+        </mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-section>
+      <mj-column>
+        <mj-text font-style="italic" color="#555555">
+          <em>"On ne voit bien qu’avec le cœur. L’essentiel est invisible pour les yeux."</em><br/>
+          — Antoine de Saint-Exupéry
+        </mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-section>
+      <mj-column>
+        <mj-text>
+          Ma douce,
+        </mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-section>
+      <mj-column>
+        <mj-text>
+          Je t’écris <strong>dans le silence</strong>, avec les mots que le vent murmure dans mes nuits.<br/>
+          Tu es <em>l’infime vibration</em> dans le désert de mes pensées.<br/>
+          Tu es ce <strong>point fixe</strong>, ce <code>const char *etoile = &quot;toi&quot;</code> dans mon ciel en dérive.
+        </mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-section>
+      <mj-column>
+        <mj-divider border-color="#cccccc" border-width="1px"/>
+      </mj-column>
+    </mj-section>
+    <mj-section>
+      <mj-column>
+        <mj-text>
+          <h3>Ce que j’aime chez toi</h3>
+        </mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-section>
+      <mj-column>
+        <mj-text>
+          <ul>
+            <li>
+              Ton <strong>regard</strong>, vaste comme un ciel d’aviateur
+            </li>
+            <li>
+              Ton rire, <em>plus léger qu’un planeur</em>
+            </li>
+            <li>
+              Ta voix, qui danse comme le <strong>sable sous le vent</strong>
+            </li>
+          </ul>
+        </mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-section>
+      <mj-column>
+        <mj-text>
+          Et parfois, comme un navigateur perdu, je me <strong>raccroche à des images</strong> :
+        </mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-section>
+      <mj-column>
+        <mj-image src="https://picsum.photos/600/300" alt="Ton regard dans mes songes"/>
+        <mj-image src="https://picsum.photos/400/150" alt="Ta silhouette dans la lumière"/>
+      </mj-column>
+    </mj-section>
+    <mj-section>
+      <mj-column>
+        <mj-divider border-color="#cccccc" border-width="1px"/>
+      </mj-column>
+    </mj-section>
+    <mj-section>
+      <mj-column>
+        <mj-text>
+          <h2>Quand je pense à nous</h2>
+        </mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-section>
+      <mj-column>
+        <mj-text>
+          Voici ce que mon cœur pense, en code :
+        </mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-section>
+      <mj-column>
+        <mj-text>
+          <pre>
+def aime_toi(moi):
+    while True:
+        print(&quot;Je pense à toi.&quot;)
+          </pre>
+        </mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-section>
+      <mj-column>
+        <mj-text>
+          Chaque jour, je relance ce script de l’âme.
+        </mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-section>
+      <mj-column>
+        <mj-divider border-color="#cccccc" border-width="1px"/>
+      </mj-column>
+    </mj-section>
+    <mj-section>
+      <mj-column>
+        <mj-text>
+          <h2>Nos souvenirs</h2>
+        </mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-section>
+      <mj-column>
+        <mj-table>
+          <tr>
+            <th>Moment</th>
+            <th>Lieu</th>
+            <th>Émotion</th>
+          </tr>
+          <tr>
+            <td>Premier regard</td>
+            <td>Quai de la Seine</td>
+            <td>Frisson</td>
+          </tr>
+          <tr>
+            <td>Rires partagés</td>
+            <td>Rue des Martyrs</td>
+            <td>Plénitude</td>
+          </tr>
+          <tr>
+            <td>Dernier adieu</td>
+            <td>Gare de Lyon</td>
+            <td>Douleur douce</td>
+          </tr>
+        </mj-table>
+      </mj-column>
+    </mj-section>
+    <mj-section>
+      <mj-column>
+        <mj-text>
+          Et pourtant, j’ai appris :
+        </mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-section>
+      <mj-column>
+        <mj-text font-style="italic" color="#555555">
+          <em>"Tu deviens responsable pour toujours de ce que tu as apprivoisé."</em>
+        </mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-section>
+      <mj-column>
+        <mj-divider border-color="#cccccc" border-width="1px"/>
+      </mj-column>
+    </mj-section>
+    <mj-section>
+      <mj-column>
+        <mj-text>
+          <h2>Où que tu sois</h2>
+        </mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-section>
+      <mj-column>
+        <mj-text>
+          <a href="https://exemple.com/penser-a-toi">Je t’enverrai toujours des pensées</a><br/>
+          <a href="https://exemple.com/etoile-perdue">Je suivrai ton étoile</a><br/>
+          <a href="https://exemple.com/renard-lien">Je resterai ton renard</a>
+        </mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-section>
+      <mj-column>
+        <mj-text>
+          Et même si tu n’ouvres jamais cette lettre...
+        </mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-section>
+      <mj-column>
+        <mj-divider border-color="#cccccc" border-width="1px"/>
+      </mj-column>
+    </mj-section>
+    <mj-section>
+      <mj-column>
+        <mj-text>
+          <h3><em>...je saurai qu’elle a existé.</em></h3>
+        </mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-section>
+      <mj-column>
+        <mj-text>
+          <strong>Je t’écris avec l’innocence d’un enfant,</strong><br/>
+          comme on trace une étoile dans le sable,<br/>
+          en espérant que la mer ne l’efface pas tout de suite.
+        </mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-section>
+      <mj-column>
+        <mj-text font-style="italic" color="#555555">
+          💌 <em>Reçois cette lettre, non comme un appel, mais comme un éclat d’éternité.</em>
+        </mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-section>
+      <mj-column>
+        <mj-text>
+          <strong>Ton aviateur du cœur,</strong><br/>
+          <em>L.</em>
+        </mj-text>
+      </mj-column>
+    </mj-section>
+  </mj-body>
+</mjml></code></pre>
+    </div>
+  </div>
+  <div class="right-panel">
+    <div class="toolbar">
+      <label for="device-select">Device:</label>
+      <select id="device-select" onchange="setDevice(this.value)">
+        <option value="desktop">Desktop (100%)</option>
+        <option value="iphone">iPhone 14 (390×844)</option>
+        <option value="pixel">Pixel 7 (412×915)</option>
+        <option value="ipad">iPad (768×1024)</option>
+      </select>
+    </div>
+    <div class="render-container">
+      <div class="device-wrapper" id="device-wrapper">
+        <iframe id="preview-frame" class="device-frame"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+  <script>
+    hljs.highlightAll();
+
+    const htmlContent = "\u003c!doctype html\u003e\u003chtml xmlns=\"http://www.w3.org/1999/xhtml\" xmlns:v=\"urn:schemas-microsoft-com:vml\" xmlns:o=\"urn:schemas-microsoft-com:office:office\"\u003e\u003chead\u003e\u003ctitle\u003e\u003c/title\u003e\u003c!--[if !mso]\u003e\u003c!--\u003e\u003cmeta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\"\u003e\u003c!--\u003c![endif]--\u003e\u003cmeta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"\u003e\u003cmeta name=\"viewport\" content=\"width=device-width, initial-scale=1\"\u003e\n\u003cstyle type=\"text/css\"\u003e\n#outlook a { padding: 0; }\nbody { margin: 0; padding: 0; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }\ntable, td { border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; }\nimg { border: 0; height: auto; line-height: 100%; outline: none; text-decoration: none; -ms-interpolation-mode: bicubic; }\np { display: block; margin: 13px 0; }\n\u003c/style\u003e\n\u003c!--[if mso]\u003e\n\u003cnoscript\u003e\n\u003cxml\u003e\n\u003co:OfficeDocumentSettings\u003e\n  \u003co:AllowPNG/\u003e\n  \u003co:PixelsPerInch\u003e96\u003c/o:PixelsPerInch\u003e\n\u003c/o:OfficeDocumentSettings\u003e\n\u003c/xml\u003e\n\u003c/noscript\u003e\n\u003c![endif]--\u003e\n\u003c!--[if lte mso 11]\u003e\n\u003cstyle type=\"text/css\"\u003e\n.mj-outlook-group-fix { width:100% !important; }\n\u003c/style\u003e\n\u003c![endif]--\u003e\n\u003c!--[if !mso]\u003e\u003c!--\u003e\u003clink href=\"https://fonts.googleapis.com/css?family=Ubuntu:300,400,500,700\" rel=\"stylesheet\" type=\"text/css\"\u003e\u003cstyle type=\"text/css\"\u003e@import url(https://fonts.googleapis.com/css?family=Ubuntu:300,400,500,700);\u003c/style\u003e\u003c!--\u003c![endif]--\u003e\u003cstyle type=\"text/css\"\u003e@media only screen and (min-width:480px) { .mj-column-per-100 { width:100% !important; max-width:100%; }  }\u003c/style\u003e\u003cstyle media=\"screen and (min-width:480px)\"\u003e.moz-text-html .mj-column-per-100 { width:100% !important; max-width:100%; } \u003c/style\u003e\u003cstyle type=\"text/css\"\u003e@media only screen and (max-width:479px) {\n                table.mj-full-width-mobile { width: 100% !important; }\n                td.mj-full-width-mobile { width: auto !important; }\n            }\n            \u003c/style\u003e\u003cstyle type=\"text/css\"\u003e\u003c/style\u003e\u003c/head\u003e\u003cbody style=\"word-spacing:normal;\"\u003e\u003cdiv\u003e\u003c!--[if mso | IE]\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" align=\"center\" width=\"600\" style=\"width:600px;\"\u003e\u003ctr\u003e\u003ctd style=\"line-height:0px;font-size:0px;mso-line-height-rule:exactly;\"\u003e\u003c![endif]--\u003e\u003cdiv style=\"margin:0px auto;max-width:600px;\"\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" align=\"center\" style=\"width:100%;\"\u003e\u003ctbody\u003e\u003ctr\u003e\u003ctd style=\"direction:ltr;font-size:0px;padding:0;text-align:center;\"\u003e\u003c!--[if mso | IE]\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\"\u003e\u003ctr\u003e\u003ctd style=\"vertical-align:top;width:600px;\"\u003e\u003c![endif]--\u003e\u003cdiv class=\"mj-outlook-group-fix mj-column-per-100\" style=\"font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;\"\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" width=\"100%\" style=\"vertical-align:top;\"\u003e\u003ctbody\u003e\u003ctr\u003e\u003ctd align=\"left\" style=\"font-size:0px;padding:10px 25px;word-break:break-word;\"\u003e\u003cdiv style=\"font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:13px;line-height:1;text-align:left;color:#000000;\"\u003e\u003ch1\u003eMon \u00e9toile\u003c/h1\u003e\u003c/div\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/tbody\u003e\u003c/table\u003e\u003c/div\u003e\u003c!--[if mso | IE]\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e\u003c![endif]--\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/tbody\u003e\u003c/table\u003e\u003c/div\u003e\u003c!--[if mso | IE]\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e\u003c![endif]--\u003e\u003c!--[if mso | IE]\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" align=\"center\" width=\"600\" style=\"width:600px;\"\u003e\u003ctr\u003e\u003ctd style=\"line-height:0px;font-size:0px;mso-line-height-rule:exactly;\"\u003e\u003c![endif]--\u003e\u003cdiv style=\"margin:0px auto;max-width:600px;\"\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" align=\"center\" style=\"width:100%;\"\u003e\u003ctbody\u003e\u003ctr\u003e\u003ctd style=\"direction:ltr;font-size:0px;padding:0;text-align:center;\"\u003e\u003c!--[if mso | IE]\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\"\u003e\u003ctr\u003e\u003ctd style=\"vertical-align:top;width:600px;\"\u003e\u003c![endif]--\u003e\u003cdiv class=\"mj-outlook-group-fix mj-column-per-100\" style=\"font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;\"\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" width=\"100%\" style=\"vertical-align:top;\"\u003e\u003ctbody\u003e\u003ctr\u003e\u003ctd align=\"left\" style=\"font-size:0px;padding:10px 25px;word-break:break-word;\"\u003e\u003cdiv style=\"font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:13px;line-height:1;text-align:left;color:#000000;\"\u003e\u003ch2\u003e\u003cem\u003eLettre \u00e0 celle que j\u2019ai vue dans le vent\u003c/em\u003e\u003c/h2\u003e\u003c/div\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/tbody\u003e\u003c/table\u003e\u003c/div\u003e\u003c!--[if mso | IE]\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e\u003c![endif]--\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/tbody\u003e\u003c/table\u003e\u003c/div\u003e\u003c!--[if mso | IE]\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e\u003c![endif]--\u003e\u003c!--[if mso | IE]\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" align=\"center\" width=\"600\" style=\"width:600px;\"\u003e\u003ctr\u003e\u003ctd style=\"line-height:0px;font-size:0px;mso-line-height-rule:exactly;\"\u003e\u003c![endif]--\u003e\u003cdiv style=\"margin:0px auto;max-width:600px;\"\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" align=\"center\" style=\"width:100%;\"\u003e\u003ctbody\u003e\u003ctr\u003e\u003ctd style=\"direction:ltr;font-size:0px;padding:0;text-align:center;\"\u003e\u003c!--[if mso | IE]\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\"\u003e\u003ctr\u003e\u003ctd style=\"vertical-align:top;width:600px;\"\u003e\u003c![endif]--\u003e\u003cdiv class=\"mj-outlook-group-fix mj-column-per-100\" style=\"font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;\"\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" width=\"100%\" style=\"vertical-align:top;\"\u003e\u003ctbody\u003e\u003ctr\u003e\u003ctd align=\"left\" style=\"font-size:0px;padding:10px 25px;word-break:break-word;\"\u003e\u003cdiv style=\"font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:13px;font-style:italic;line-height:1;text-align:left;color:#555555;\"\u003e\u003cem\u003e\"On ne voit bien qu\u2019avec le c\u0153ur. L\u2019essentiel est invisible pour les yeux.\"\u003c/em\u003e\u003cbr /\u003e\n          \u2014 Antoine de Saint-Exup\u00e9ry\n        \u003c/div\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/tbody\u003e\u003c/table\u003e\u003c/div\u003e\u003c!--[if mso | IE]\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e\u003c![endif]--\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/tbody\u003e\u003c/table\u003e\u003c/div\u003e\u003c!--[if mso | IE]\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e\u003c![endif]--\u003e\u003c!--[if mso | IE]\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" align=\"center\" width=\"600\" style=\"width:600px;\"\u003e\u003ctr\u003e\u003ctd style=\"line-height:0px;font-size:0px;mso-line-height-rule:exactly;\"\u003e\u003c![endif]--\u003e\u003cdiv style=\"margin:0px auto;max-width:600px;\"\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" align=\"center\" style=\"width:100%;\"\u003e\u003ctbody\u003e\u003ctr\u003e\u003ctd style=\"direction:ltr;font-size:0px;padding:0;text-align:center;\"\u003e\u003c!--[if mso | IE]\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\"\u003e\u003ctr\u003e\u003ctd style=\"vertical-align:top;width:600px;\"\u003e\u003c![endif]--\u003e\u003cdiv class=\"mj-outlook-group-fix mj-column-per-100\" style=\"font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;\"\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" width=\"100%\" style=\"vertical-align:top;\"\u003e\u003ctbody\u003e\u003ctr\u003e\u003ctd align=\"left\" style=\"font-size:0px;padding:10px 25px;word-break:break-word;\"\u003e\u003cdiv style=\"font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:13px;line-height:1;text-align:left;color:#000000;\"\u003e\n          Ma douce,\n        \u003c/div\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/tbody\u003e\u003c/table\u003e\u003c/div\u003e\u003c!--[if mso | IE]\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e\u003c![endif]--\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/tbody\u003e\u003c/table\u003e\u003c/div\u003e\u003c!--[if mso | IE]\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e\u003c![endif]--\u003e\u003c!--[if mso | IE]\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" align=\"center\" width=\"600\" style=\"width:600px;\"\u003e\u003ctr\u003e\u003ctd style=\"line-height:0px;font-size:0px;mso-line-height-rule:exactly;\"\u003e\u003c![endif]--\u003e\u003cdiv style=\"margin:0px auto;max-width:600px;\"\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" align=\"center\" style=\"width:100%;\"\u003e\u003ctbody\u003e\u003ctr\u003e\u003ctd style=\"direction:ltr;font-size:0px;padding:0;text-align:center;\"\u003e\u003c!--[if mso | IE]\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\"\u003e\u003ctr\u003e\u003ctd style=\"vertical-align:top;width:600px;\"\u003e\u003c![endif]--\u003e\u003cdiv class=\"mj-outlook-group-fix mj-column-per-100\" style=\"font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;\"\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" width=\"100%\" style=\"vertical-align:top;\"\u003e\u003ctbody\u003e\u003ctr\u003e\u003ctd align=\"left\" style=\"font-size:0px;padding:10px 25px;word-break:break-word;\"\u003e\u003cdiv style=\"font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:13px;line-height:1;text-align:left;color:#000000;\"\u003e\n          Je t\u2019\u00e9cris \u003cstrong\u003edans le silence\u003c/strong\u003e, avec les mots que le vent murmure dans mes nuits.\u003cbr /\u003e\n          Tu es \u003cem\u003el\u2019infime vibration\u003c/em\u003e dans le d\u00e9sert de mes pens\u00e9es.\u003cbr /\u003e\n          Tu es ce \u003cstrong\u003epoint fixe\u003c/strong\u003e, ce \u003ccode\u003econst char *etoile = \u0026quot;toi\u0026quot;\u003c/code\u003e dans mon ciel en d\u00e9rive.\n        \u003c/div\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/tbody\u003e\u003c/table\u003e\u003c/div\u003e\u003c!--[if mso | IE]\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e\u003c![endif]--\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/tbody\u003e\u003c/table\u003e\u003c/div\u003e\u003c!--[if mso | IE]\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e\u003c![endif]--\u003e\u003c!--[if mso | IE]\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" align=\"center\" width=\"600\" style=\"width:600px;\"\u003e\u003ctr\u003e\u003ctd style=\"line-height:0px;font-size:0px;mso-line-height-rule:exactly;\"\u003e\u003c![endif]--\u003e\u003cdiv style=\"margin:0px auto;max-width:600px;\"\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" align=\"center\" style=\"width:100%;\"\u003e\u003ctbody\u003e\u003ctr\u003e\u003ctd style=\"direction:ltr;font-size:0px;padding:0;text-align:center;\"\u003e\u003c!--[if mso | IE]\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\"\u003e\u003ctr\u003e\u003ctd style=\"vertical-align:top;width:600px;\"\u003e\u003c![endif]--\u003e\u003cdiv class=\"mj-outlook-group-fix mj-column-per-100\" style=\"font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;\"\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" width=\"100%\" style=\"vertical-align:top;\"\u003e\u003ctbody\u003e\u003ctr\u003e\u003ctd align=\"center\" style=\"font-size:0px;padding:10px 25px;word-break:break-word;\"\u003e\u003cp style=\"border-top:solid 1px #cccccc;font-size:1px;margin:0px auto;width:100%;\"\u003e\u003c/p\u003e\u003c!--[if mso | IE]\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" align=\"center\" width=\"550px\" style=\"border-top:solid 1px #cccccc;font-size:1px;margin:0px auto;width:550px;\"\u003e\u003ctr\u003e\u003ctd style=\"height:0;line-height:0;\"\u003e\u0026nbsp;\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e\u003c![endif]--\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/tbody\u003e\u003c/table\u003e\u003c/div\u003e\u003c!--[if mso | IE]\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e\u003c![endif]--\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/tbody\u003e\u003c/table\u003e\u003c/div\u003e\u003c!--[if mso | IE]\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e\u003c![endif]--\u003e\u003c!--[if mso | IE]\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" align=\"center\" width=\"600\" style=\"width:600px;\"\u003e\u003ctr\u003e\u003ctd style=\"line-height:0px;font-size:0px;mso-line-height-rule:exactly;\"\u003e\u003c![endif]--\u003e\u003cdiv style=\"margin:0px auto;max-width:600px;\"\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" align=\"center\" style=\"width:100%;\"\u003e\u003ctbody\u003e\u003ctr\u003e\u003ctd style=\"direction:ltr;font-size:0px;padding:0;text-align:center;\"\u003e\u003c!--[if mso | IE]\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\"\u003e\u003ctr\u003e\u003ctd style=\"vertical-align:top;width:600px;\"\u003e\u003c![endif]--\u003e\u003cdiv class=\"mj-outlook-group-fix mj-column-per-100\" style=\"font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;\"\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" width=\"100%\" style=\"vertical-align:top;\"\u003e\u003ctbody\u003e\u003ctr\u003e\u003ctd align=\"left\" style=\"font-size:0px;padding:10px 25px;word-break:break-word;\"\u003e\u003cdiv style=\"font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:13px;line-height:1;text-align:left;color:#000000;\"\u003e\u003ch3\u003eCe que j\u2019aime chez toi\u003c/h3\u003e\u003c/div\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/tbody\u003e\u003c/table\u003e\u003c/div\u003e\u003c!--[if mso | IE]\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e\u003c![endif]--\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/tbody\u003e\u003c/table\u003e\u003c/div\u003e\u003c!--[if mso | IE]\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e\u003c![endif]--\u003e\u003c!--[if mso | IE]\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" align=\"center\" width=\"600\" style=\"width:600px;\"\u003e\u003ctr\u003e\u003ctd style=\"line-height:0px;font-size:0px;mso-line-height-rule:exactly;\"\u003e\u003c![endif]--\u003e\u003cdiv style=\"margin:0px auto;max-width:600px;\"\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" align=\"center\" style=\"width:100%;\"\u003e\u003ctbody\u003e\u003ctr\u003e\u003ctd style=\"direction:ltr;font-size:0px;padding:0;text-align:center;\"\u003e\u003c!--[if mso | IE]\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\"\u003e\u003ctr\u003e\u003ctd style=\"vertical-align:top;width:600px;\"\u003e\u003c![endif]--\u003e\u003cdiv class=\"mj-outlook-group-fix mj-column-per-100\" style=\"font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;\"\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" width=\"100%\" style=\"vertical-align:top;\"\u003e\u003ctbody\u003e\u003ctr\u003e\u003ctd align=\"left\" style=\"font-size:0px;padding:10px 25px;word-break:break-word;\"\u003e\u003cdiv style=\"font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:13px;line-height:1;text-align:left;color:#000000;\"\u003e\u003cul\u003e\u003cli\u003e\n              Ton \u003cstrong\u003eregard\u003c/strong\u003e, vaste comme un ciel d\u2019aviateur\n            \u003c/li\u003e\u003cli\u003e\n              Ton rire, \u003cem\u003eplus l\u00e9ger qu\u2019un planeur\u003c/em\u003e\u003c/li\u003e\u003cli\u003e\n              Ta voix, qui danse comme le \u003cstrong\u003esable sous le vent\u003c/strong\u003e\u003c/li\u003e\u003c/ul\u003e\u003c/div\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/tbody\u003e\u003c/table\u003e\u003c/div\u003e\u003c!--[if mso | IE]\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e\u003c![endif]--\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/tbody\u003e\u003c/table\u003e\u003c/div\u003e\u003c!--[if mso | IE]\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e\u003c![endif]--\u003e\u003c!--[if mso | IE]\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" align=\"center\" width=\"600\" style=\"width:600px;\"\u003e\u003ctr\u003e\u003ctd style=\"line-height:0px;font-size:0px;mso-line-height-rule:exactly;\"\u003e\u003c![endif]--\u003e\u003cdiv style=\"margin:0px auto;max-width:600px;\"\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" align=\"center\" style=\"width:100%;\"\u003e\u003ctbody\u003e\u003ctr\u003e\u003ctd style=\"direction:ltr;font-size:0px;padding:0;text-align:center;\"\u003e\u003c!--[if mso | IE]\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\"\u003e\u003ctr\u003e\u003ctd style=\"vertical-align:top;width:600px;\"\u003e\u003c![endif]--\u003e\u003cdiv class=\"mj-outlook-group-fix mj-column-per-100\" style=\"font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;\"\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" width=\"100%\" style=\"vertical-align:top;\"\u003e\u003ctbody\u003e\u003ctr\u003e\u003ctd align=\"left\" style=\"font-size:0px;padding:10px 25px;word-break:break-word;\"\u003e\u003cdiv style=\"font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:13px;line-height:1;text-align:left;color:#000000;\"\u003e\n          Et parfois, comme un navigateur perdu, je me \u003cstrong\u003eraccroche \u00e0 des images\u003c/strong\u003e :\n        \u003c/div\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/tbody\u003e\u003c/table\u003e\u003c/div\u003e\u003c!--[if mso | IE]\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e\u003c![endif]--\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/tbody\u003e\u003c/table\u003e\u003c/div\u003e\u003c!--[if mso | IE]\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e\u003c![endif]--\u003e\u003c!--[if mso | IE]\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" align=\"center\" width=\"600\" style=\"width:600px;\"\u003e\u003ctr\u003e\u003ctd style=\"line-height:0px;font-size:0px;mso-line-height-rule:exactly;\"\u003e\u003c![endif]--\u003e\u003cdiv style=\"margin:0px auto;max-width:600px;\"\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" align=\"center\" style=\"width:100%;\"\u003e\u003ctbody\u003e\u003ctr\u003e\u003ctd style=\"direction:ltr;font-size:0px;padding:0;text-align:center;\"\u003e\u003c!--[if mso | IE]\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\"\u003e\u003ctr\u003e\u003ctd style=\"vertical-align:top;width:600px;\"\u003e\u003c![endif]--\u003e\u003cdiv class=\"mj-outlook-group-fix mj-column-per-100\" style=\"font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;\"\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" width=\"100%\" style=\"vertical-align:top;\"\u003e\u003ctbody\u003e\u003ctr\u003e\u003ctd align=\"center\" style=\"font-size:0px;padding:10px 25px;word-break:break-word;\"\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"border-collapse:collapse;border-spacing:0px;\"\u003e\u003ctbody\u003e\u003ctr\u003e\u003ctd style=\"width:550px;\"\u003e\u003cimg alt=\"Ton regard dans mes songes\" height=\"auto\" src=\"https://picsum.photos/600/300\" width=\"550\" style=\"border:0;display:block;outline:none;text-decoration:none;height:auto;width:100%;font-size:13px;\" /\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/tbody\u003e\u003c/table\u003e\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd align=\"center\" style=\"font-size:0px;padding:10px 25px;word-break:break-word;\"\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"border-collapse:collapse;border-spacing:0px;\"\u003e\u003ctbody\u003e\u003ctr\u003e\u003ctd style=\"width:550px;\"\u003e\u003cimg alt=\"Ta silhouette dans la lumi\u00e8re\" height=\"auto\" src=\"https://picsum.photos/400/150\" width=\"550\" style=\"border:0;display:block;outline:none;text-decoration:none;height:auto;width:100%;font-size:13px;\" /\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/tbody\u003e\u003c/table\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/tbody\u003e\u003c/table\u003e\u003c/div\u003e\u003c!--[if mso | IE]\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e\u003c![endif]--\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/tbody\u003e\u003c/table\u003e\u003c/div\u003e\u003c!--[if mso | IE]\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e\u003c![endif]--\u003e\u003c!--[if mso | IE]\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" align=\"center\" width=\"600\" style=\"width:600px;\"\u003e\u003ctr\u003e\u003ctd style=\"line-height:0px;font-size:0px;mso-line-height-rule:exactly;\"\u003e\u003c![endif]--\u003e\u003cdiv style=\"margin:0px auto;max-width:600px;\"\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" align=\"center\" style=\"width:100%;\"\u003e\u003ctbody\u003e\u003ctr\u003e\u003ctd style=\"direction:ltr;font-size:0px;padding:0;text-align:center;\"\u003e\u003c!--[if mso | IE]\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\"\u003e\u003ctr\u003e\u003ctd style=\"vertical-align:top;width:600px;\"\u003e\u003c![endif]--\u003e\u003cdiv class=\"mj-outlook-group-fix mj-column-per-100\" style=\"font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;\"\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" width=\"100%\" style=\"vertical-align:top;\"\u003e\u003ctbody\u003e\u003ctr\u003e\u003ctd align=\"center\" style=\"font-size:0px;padding:10px 25px;word-break:break-word;\"\u003e\u003cp style=\"border-top:solid 1px #cccccc;font-size:1px;margin:0px auto;width:100%;\"\u003e\u003c/p\u003e\u003c!--[if mso | IE]\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" align=\"center\" width=\"550px\" style=\"border-top:solid 1px #cccccc;font-size:1px;margin:0px auto;width:550px;\"\u003e\u003ctr\u003e\u003ctd style=\"height:0;line-height:0;\"\u003e\u0026nbsp;\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e\u003c![endif]--\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/tbody\u003e\u003c/table\u003e\u003c/div\u003e\u003c!--[if mso | IE]\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e\u003c![endif]--\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/tbody\u003e\u003c/table\u003e\u003c/div\u003e\u003c!--[if mso | IE]\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e\u003c![endif]--\u003e\u003c!--[if mso | IE]\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" align=\"center\" width=\"600\" style=\"width:600px;\"\u003e\u003ctr\u003e\u003ctd style=\"line-height:0px;font-size:0px;mso-line-height-rule:exactly;\"\u003e\u003c![endif]--\u003e\u003cdiv style=\"margin:0px auto;max-width:600px;\"\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" align=\"center\" style=\"width:100%;\"\u003e\u003ctbody\u003e\u003ctr\u003e\u003ctd style=\"direction:ltr;font-size:0px;padding:0;text-align:center;\"\u003e\u003c!--[if mso | IE]\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\"\u003e\u003ctr\u003e\u003ctd style=\"vertical-align:top;width:600px;\"\u003e\u003c![endif]--\u003e\u003cdiv class=\"mj-outlook-group-fix mj-column-per-100\" style=\"font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;\"\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" width=\"100%\" style=\"vertical-align:top;\"\u003e\u003ctbody\u003e\u003ctr\u003e\u003ctd align=\"left\" style=\"font-size:0px;padding:10px 25px;word-break:break-word;\"\u003e\u003cdiv style=\"font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:13px;line-height:1;text-align:left;color:#000000;\"\u003e\u003ch2\u003eQuand je pense \u00e0 nous\u003c/h2\u003e\u003c/div\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/tbody\u003e\u003c/table\u003e\u003c/div\u003e\u003c!--[if mso | IE]\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e\u003c![endif]--\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/tbody\u003e\u003c/table\u003e\u003c/div\u003e\u003c!--[if mso | IE]\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e\u003c![endif]--\u003e\u003c!--[if mso | IE]\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" align=\"center\" width=\"600\" style=\"width:600px;\"\u003e\u003ctr\u003e\u003ctd style=\"line-height:0px;font-size:0px;mso-line-height-rule:exactly;\"\u003e\u003c![endif]--\u003e\u003cdiv style=\"margin:0px auto;max-width:600px;\"\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" align=\"center\" style=\"width:100%;\"\u003e\u003ctbody\u003e\u003ctr\u003e\u003ctd style=\"direction:ltr;font-size:0px;padding:0;text-align:center;\"\u003e\u003c!--[if mso | IE]\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\"\u003e\u003ctr\u003e\u003ctd style=\"vertical-align:top;width:600px;\"\u003e\u003c![endif]--\u003e\u003cdiv class=\"mj-outlook-group-fix mj-column-per-100\" style=\"font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;\"\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" width=\"100%\" style=\"vertical-align:top;\"\u003e\u003ctbody\u003e\u003ctr\u003e\u003ctd align=\"left\" style=\"font-size:0px;padding:10px 25px;word-break:break-word;\"\u003e\u003cdiv style=\"font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:13px;line-height:1;text-align:left;color:#000000;\"\u003e\n          Voici ce que mon c\u0153ur pense, en code :\n        \u003c/div\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/tbody\u003e\u003c/table\u003e\u003c/div\u003e\u003c!--[if mso | IE]\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e\u003c![endif]--\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/tbody\u003e\u003c/table\u003e\u003c/div\u003e\u003c!--[if mso | IE]\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e\u003c![endif]--\u003e\u003c!--[if mso | IE]\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" align=\"center\" width=\"600\" style=\"width:600px;\"\u003e\u003ctr\u003e\u003ctd style=\"line-height:0px;font-size:0px;mso-line-height-rule:exactly;\"\u003e\u003c![endif]--\u003e\u003cdiv style=\"margin:0px auto;max-width:600px;\"\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" align=\"center\" style=\"width:100%;\"\u003e\u003ctbody\u003e\u003ctr\u003e\u003ctd style=\"direction:ltr;font-size:0px;padding:0;text-align:center;\"\u003e\u003c!--[if mso | IE]\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\"\u003e\u003ctr\u003e\u003ctd style=\"vertical-align:top;width:600px;\"\u003e\u003c![endif]--\u003e\u003cdiv class=\"mj-outlook-group-fix mj-column-per-100\" style=\"font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;\"\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" width=\"100%\" style=\"vertical-align:top;\"\u003e\u003ctbody\u003e\u003ctr\u003e\u003ctd align=\"left\" style=\"font-size:0px;padding:10px 25px;word-break:break-word;\"\u003e\u003cdiv style=\"font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:13px;line-height:1;text-align:left;color:#000000;\"\u003e\u003cpre\u003e\ndef aime_toi(moi):\n    while True:\n        print(\u0026quot;Je pense \u00e0 toi.\u0026quot;)\n          \u003c/pre\u003e\u003c/div\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/tbody\u003e\u003c/table\u003e\u003c/div\u003e\u003c!--[if mso | IE]\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e\u003c![endif]--\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/tbody\u003e\u003c/table\u003e\u003c/div\u003e\u003c!--[if mso | IE]\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e\u003c![endif]--\u003e\u003c!--[if mso | IE]\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" align=\"center\" width=\"600\" style=\"width:600px;\"\u003e\u003ctr\u003e\u003ctd style=\"line-height:0px;font-size:0px;mso-line-height-rule:exactly;\"\u003e\u003c![endif]--\u003e\u003cdiv style=\"margin:0px auto;max-width:600px;\"\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" align=\"center\" style=\"width:100%;\"\u003e\u003ctbody\u003e\u003ctr\u003e\u003ctd style=\"direction:ltr;font-size:0px;padding:0;text-align:center;\"\u003e\u003c!--[if mso | IE]\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\"\u003e\u003ctr\u003e\u003ctd style=\"vertical-align:top;width:600px;\"\u003e\u003c![endif]--\u003e\u003cdiv class=\"mj-outlook-group-fix mj-column-per-100\" style=\"font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;\"\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" width=\"100%\" style=\"vertical-align:top;\"\u003e\u003ctbody\u003e\u003ctr\u003e\u003ctd align=\"left\" style=\"font-size:0px;padding:10px 25px;word-break:break-word;\"\u003e\u003cdiv style=\"font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:13px;line-height:1;text-align:left;color:#000000;\"\u003e\n          Chaque jour, je relance ce script de l\u2019\u00e2me.\n        \u003c/div\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/tbody\u003e\u003c/table\u003e\u003c/div\u003e\u003c!--[if mso | IE]\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e\u003c![endif]--\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/tbody\u003e\u003c/table\u003e\u003c/div\u003e\u003c!--[if mso | IE]\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e\u003c![endif]--\u003e\u003c!--[if mso | IE]\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" align=\"center\" width=\"600\" style=\"width:600px;\"\u003e\u003ctr\u003e\u003ctd style=\"line-height:0px;font-size:0px;mso-line-height-rule:exactly;\"\u003e\u003c![endif]--\u003e\u003cdiv style=\"margin:0px auto;max-width:600px;\"\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" align=\"center\" style=\"width:100%;\"\u003e\u003ctbody\u003e\u003ctr\u003e\u003ctd style=\"direction:ltr;font-size:0px;padding:0;text-align:center;\"\u003e\u003c!--[if mso | IE]\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\"\u003e\u003ctr\u003e\u003ctd style=\"vertical-align:top;width:600px;\"\u003e\u003c![endif]--\u003e\u003cdiv class=\"mj-outlook-group-fix mj-column-per-100\" style=\"font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;\"\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" width=\"100%\" style=\"vertical-align:top;\"\u003e\u003ctbody\u003e\u003ctr\u003e\u003ctd align=\"center\" style=\"font-size:0px;padding:10px 25px;word-break:break-word;\"\u003e\u003cp style=\"border-top:solid 1px #cccccc;font-size:1px;margin:0px auto;width:100%;\"\u003e\u003c/p\u003e\u003c!--[if mso | IE]\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" align=\"center\" width=\"550px\" style=\"border-top:solid 1px #cccccc;font-size:1px;margin:0px auto;width:550px;\"\u003e\u003ctr\u003e\u003ctd style=\"height:0;line-height:0;\"\u003e\u0026nbsp;\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e\u003c![endif]--\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/tbody\u003e\u003c/table\u003e\u003c/div\u003e\u003c!--[if mso | IE]\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e\u003c![endif]--\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/tbody\u003e\u003c/table\u003e\u003c/div\u003e\u003c!--[if mso | IE]\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e\u003c![endif]--\u003e\u003c!--[if mso | IE]\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" align=\"center\" width=\"600\" style=\"width:600px;\"\u003e\u003ctr\u003e\u003ctd style=\"line-height:0px;font-size:0px;mso-line-height-rule:exactly;\"\u003e\u003c![endif]--\u003e\u003cdiv style=\"margin:0px auto;max-width:600px;\"\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" align=\"center\" style=\"width:100%;\"\u003e\u003ctbody\u003e\u003ctr\u003e\u003ctd style=\"direction:ltr;font-size:0px;padding:0;text-align:center;\"\u003e\u003c!--[if mso | IE]\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\"\u003e\u003ctr\u003e\u003ctd style=\"vertical-align:top;width:600px;\"\u003e\u003c![endif]--\u003e\u003cdiv class=\"mj-outlook-group-fix mj-column-per-100\" style=\"font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;\"\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" width=\"100%\" style=\"vertical-align:top;\"\u003e\u003ctbody\u003e\u003ctr\u003e\u003ctd align=\"left\" style=\"font-size:0px;padding:10px 25px;word-break:break-word;\"\u003e\u003cdiv style=\"font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:13px;line-height:1;text-align:left;color:#000000;\"\u003e\u003ch2\u003eNos souvenirs\u003c/h2\u003e\u003c/div\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/tbody\u003e\u003c/table\u003e\u003c/div\u003e\u003c!--[if mso | IE]\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e\u003c![endif]--\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/tbody\u003e\u003c/table\u003e\u003c/div\u003e\u003c!--[if mso | IE]\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e\u003c![endif]--\u003e\u003c!--[if mso | IE]\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" align=\"center\" width=\"600\" style=\"width:600px;\"\u003e\u003ctr\u003e\u003ctd style=\"line-height:0px;font-size:0px;mso-line-height-rule:exactly;\"\u003e\u003c![endif]--\u003e\u003cdiv style=\"margin:0px auto;max-width:600px;\"\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" align=\"center\" style=\"width:100%;\"\u003e\u003ctbody\u003e\u003ctr\u003e\u003ctd style=\"direction:ltr;font-size:0px;padding:0;text-align:center;\"\u003e\u003c!--[if mso | IE]\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\"\u003e\u003ctr\u003e\u003ctd style=\"vertical-align:top;width:600px;\"\u003e\u003c![endif]--\u003e\u003cdiv class=\"mj-outlook-group-fix mj-column-per-100\" style=\"font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;\"\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" width=\"100%\" style=\"vertical-align:top;\"\u003e\u003ctbody\u003e\u003ctr\u003e\u003ctd align=\"left\" style=\"font-size:0px;padding:10px 25px;word-break:break-word;\"\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\" style=\"color:#000000;font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:13px;line-height:22px;table-layout:auto;width:100%;border:none;\"\u003e\u003ctr\u003e\u003cth\u003eMoment\u003c/th\u003e\u003cth\u003eLieu\u003c/th\u003e\u003cth\u003e\u00c9motion\u003c/th\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003ePremier regard\u003c/td\u003e\u003ctd\u003eQuai de la Seine\u003c/td\u003e\u003ctd\u003eFrisson\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003eRires partag\u00e9s\u003c/td\u003e\u003ctd\u003eRue des Martyrs\u003c/td\u003e\u003ctd\u003ePl\u00e9nitude\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003eDernier adieu\u003c/td\u003e\u003ctd\u003eGare de Lyon\u003c/td\u003e\u003ctd\u003eDouleur douce\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/tbody\u003e\u003c/table\u003e\u003c/div\u003e\u003c!--[if mso | IE]\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e\u003c![endif]--\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/tbody\u003e\u003c/table\u003e\u003c/div\u003e\u003c!--[if mso | IE]\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e\u003c![endif]--\u003e\u003c!--[if mso | IE]\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" align=\"center\" width=\"600\" style=\"width:600px;\"\u003e\u003ctr\u003e\u003ctd style=\"line-height:0px;font-size:0px;mso-line-height-rule:exactly;\"\u003e\u003c![endif]--\u003e\u003cdiv style=\"margin:0px auto;max-width:600px;\"\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" align=\"center\" style=\"width:100%;\"\u003e\u003ctbody\u003e\u003ctr\u003e\u003ctd style=\"direction:ltr;font-size:0px;padding:0;text-align:center;\"\u003e\u003c!--[if mso | IE]\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\"\u003e\u003ctr\u003e\u003ctd style=\"vertical-align:top;width:600px;\"\u003e\u003c![endif]--\u003e\u003cdiv class=\"mj-outlook-group-fix mj-column-per-100\" style=\"font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;\"\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" width=\"100%\" style=\"vertical-align:top;\"\u003e\u003ctbody\u003e\u003ctr\u003e\u003ctd align=\"left\" style=\"font-size:0px;padding:10px 25px;word-break:break-word;\"\u003e\u003cdiv style=\"font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:13px;line-height:1;text-align:left;color:#000000;\"\u003e\n          Et pourtant, j\u2019ai appris :\n        \u003c/div\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/tbody\u003e\u003c/table\u003e\u003c/div\u003e\u003c!--[if mso | IE]\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e\u003c![endif]--\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/tbody\u003e\u003c/table\u003e\u003c/div\u003e\u003c!--[if mso | IE]\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e\u003c![endif]--\u003e\u003c!--[if mso | IE]\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" align=\"center\" width=\"600\" style=\"width:600px;\"\u003e\u003ctr\u003e\u003ctd style=\"line-height:0px;font-size:0px;mso-line-height-rule:exactly;\"\u003e\u003c![endif]--\u003e\u003cdiv style=\"margin:0px auto;max-width:600px;\"\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" align=\"center\" style=\"width:100%;\"\u003e\u003ctbody\u003e\u003ctr\u003e\u003ctd style=\"direction:ltr;font-size:0px;padding:0;text-align:center;\"\u003e\u003c!--[if mso | IE]\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\"\u003e\u003ctr\u003e\u003ctd style=\"vertical-align:top;width:600px;\"\u003e\u003c![endif]--\u003e\u003cdiv class=\"mj-outlook-group-fix mj-column-per-100\" style=\"font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;\"\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" width=\"100%\" style=\"vertical-align:top;\"\u003e\u003ctbody\u003e\u003ctr\u003e\u003ctd align=\"left\" style=\"font-size:0px;padding:10px 25px;word-break:break-word;\"\u003e\u003cdiv style=\"font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:13px;font-style:italic;line-height:1;text-align:left;color:#555555;\"\u003e\u003cem\u003e\"Tu deviens responsable pour toujours de ce que tu as apprivois\u00e9.\"\u003c/em\u003e\u003c/div\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/tbody\u003e\u003c/table\u003e\u003c/div\u003e\u003c!--[if mso | IE]\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e\u003c![endif]--\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/tbody\u003e\u003c/table\u003e\u003c/div\u003e\u003c!--[if mso | IE]\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e\u003c![endif]--\u003e\u003c!--[if mso | IE]\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" align=\"center\" width=\"600\" style=\"width:600px;\"\u003e\u003ctr\u003e\u003ctd style=\"line-height:0px;font-size:0px;mso-line-height-rule:exactly;\"\u003e\u003c![endif]--\u003e\u003cdiv style=\"margin:0px auto;max-width:600px;\"\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" align=\"center\" style=\"width:100%;\"\u003e\u003ctbody\u003e\u003ctr\u003e\u003ctd style=\"direction:ltr;font-size:0px;padding:0;text-align:center;\"\u003e\u003c!--[if mso | IE]\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\"\u003e\u003ctr\u003e\u003ctd style=\"vertical-align:top;width:600px;\"\u003e\u003c![endif]--\u003e\u003cdiv class=\"mj-outlook-group-fix mj-column-per-100\" style=\"font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;\"\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" width=\"100%\" style=\"vertical-align:top;\"\u003e\u003ctbody\u003e\u003ctr\u003e\u003ctd align=\"center\" style=\"font-size:0px;padding:10px 25px;word-break:break-word;\"\u003e\u003cp style=\"border-top:solid 1px #cccccc;font-size:1px;margin:0px auto;width:100%;\"\u003e\u003c/p\u003e\u003c!--[if mso | IE]\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" align=\"center\" width=\"550px\" style=\"border-top:solid 1px #cccccc;font-size:1px;margin:0px auto;width:550px;\"\u003e\u003ctr\u003e\u003ctd style=\"height:0;line-height:0;\"\u003e\u0026nbsp;\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e\u003c![endif]--\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/tbody\u003e\u003c/table\u003e\u003c/div\u003e\u003c!--[if mso | IE]\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e\u003c![endif]--\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/tbody\u003e\u003c/table\u003e\u003c/div\u003e\u003c!--[if mso | IE]\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e\u003c![endif]--\u003e\u003c!--[if mso | IE]\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" align=\"center\" width=\"600\" style=\"width:600px;\"\u003e\u003ctr\u003e\u003ctd style=\"line-height:0px;font-size:0px;mso-line-height-rule:exactly;\"\u003e\u003c![endif]--\u003e\u003cdiv style=\"margin:0px auto;max-width:600px;\"\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" align=\"center\" style=\"width:100%;\"\u003e\u003ctbody\u003e\u003ctr\u003e\u003ctd style=\"direction:ltr;font-size:0px;padding:0;text-align:center;\"\u003e\u003c!--[if mso | IE]\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\"\u003e\u003ctr\u003e\u003ctd style=\"vertical-align:top;width:600px;\"\u003e\u003c![endif]--\u003e\u003cdiv class=\"mj-outlook-group-fix mj-column-per-100\" style=\"font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;\"\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" width=\"100%\" style=\"vertical-align:top;\"\u003e\u003ctbody\u003e\u003ctr\u003e\u003ctd align=\"left\" style=\"font-size:0px;padding:10px 25px;word-break:break-word;\"\u003e\u003cdiv style=\"font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:13px;line-height:1;text-align:left;color:#000000;\"\u003e\u003ch2\u003eO\u00f9 que tu sois\u003c/h2\u003e\u003c/div\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/tbody\u003e\u003c/table\u003e\u003c/div\u003e\u003c!--[if mso | IE]\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e\u003c![endif]--\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/tbody\u003e\u003c/table\u003e\u003c/div\u003e\u003c!--[if mso | IE]\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e\u003c![endif]--\u003e\u003c!--[if mso | IE]\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" align=\"center\" width=\"600\" style=\"width:600px;\"\u003e\u003ctr\u003e\u003ctd style=\"line-height:0px;font-size:0px;mso-line-height-rule:exactly;\"\u003e\u003c![endif]--\u003e\u003cdiv style=\"margin:0px auto;max-width:600px;\"\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" align=\"center\" style=\"width:100%;\"\u003e\u003ctbody\u003e\u003ctr\u003e\u003ctd style=\"direction:ltr;font-size:0px;padding:0;text-align:center;\"\u003e\u003c!--[if mso | IE]\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\"\u003e\u003ctr\u003e\u003ctd style=\"vertical-align:top;width:600px;\"\u003e\u003c![endif]--\u003e\u003cdiv class=\"mj-outlook-group-fix mj-column-per-100\" style=\"font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;\"\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" width=\"100%\" style=\"vertical-align:top;\"\u003e\u003ctbody\u003e\u003ctr\u003e\u003ctd align=\"left\" style=\"font-size:0px;padding:10px 25px;word-break:break-word;\"\u003e\u003cdiv style=\"font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:13px;line-height:1;text-align:left;color:#000000;\"\u003e\u003ca href=\"https://exemple.com/penser-a-toi\"\u003eJe t\u2019enverrai toujours des pens\u00e9es\u003c/a\u003e\u003cbr /\u003e\u003ca href=\"https://exemple.com/etoile-perdue\"\u003eJe suivrai ton \u00e9toile\u003c/a\u003e\u003cbr /\u003e\u003ca href=\"https://exemple.com/renard-lien\"\u003eJe resterai ton renard\u003c/a\u003e\u003c/div\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/tbody\u003e\u003c/table\u003e\u003c/div\u003e\u003c!--[if mso | IE]\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e\u003c![endif]--\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/tbody\u003e\u003c/table\u003e\u003c/div\u003e\u003c!--[if mso | IE]\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e\u003c![endif]--\u003e\u003c!--[if mso | IE]\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" align=\"center\" width=\"600\" style=\"width:600px;\"\u003e\u003ctr\u003e\u003ctd style=\"line-height:0px;font-size:0px;mso-line-height-rule:exactly;\"\u003e\u003c![endif]--\u003e\u003cdiv style=\"margin:0px auto;max-width:600px;\"\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" align=\"center\" style=\"width:100%;\"\u003e\u003ctbody\u003e\u003ctr\u003e\u003ctd style=\"direction:ltr;font-size:0px;padding:0;text-align:center;\"\u003e\u003c!--[if mso | IE]\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\"\u003e\u003ctr\u003e\u003ctd style=\"vertical-align:top;width:600px;\"\u003e\u003c![endif]--\u003e\u003cdiv class=\"mj-outlook-group-fix mj-column-per-100\" style=\"font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;\"\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" width=\"100%\" style=\"vertical-align:top;\"\u003e\u003ctbody\u003e\u003ctr\u003e\u003ctd align=\"left\" style=\"font-size:0px;padding:10px 25px;word-break:break-word;\"\u003e\u003cdiv style=\"font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:13px;line-height:1;text-align:left;color:#000000;\"\u003e\n          Et m\u00eame si tu n\u2019ouvres jamais cette lettre...\n        \u003c/div\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/tbody\u003e\u003c/table\u003e\u003c/div\u003e\u003c!--[if mso | IE]\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e\u003c![endif]--\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/tbody\u003e\u003c/table\u003e\u003c/div\u003e\u003c!--[if mso | IE]\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e\u003c![endif]--\u003e\u003c!--[if mso | IE]\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" align=\"center\" width=\"600\" style=\"width:600px;\"\u003e\u003ctr\u003e\u003ctd style=\"line-height:0px;font-size:0px;mso-line-height-rule:exactly;\"\u003e\u003c![endif]--\u003e\u003cdiv style=\"margin:0px auto;max-width:600px;\"\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" align=\"center\" style=\"width:100%;\"\u003e\u003ctbody\u003e\u003ctr\u003e\u003ctd style=\"direction:ltr;font-size:0px;padding:0;text-align:center;\"\u003e\u003c!--[if mso | IE]\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\"\u003e\u003ctr\u003e\u003ctd style=\"vertical-align:top;width:600px;\"\u003e\u003c![endif]--\u003e\u003cdiv class=\"mj-outlook-group-fix mj-column-per-100\" style=\"font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;\"\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" width=\"100%\" style=\"vertical-align:top;\"\u003e\u003ctbody\u003e\u003ctr\u003e\u003ctd align=\"center\" style=\"font-size:0px;padding:10px 25px;word-break:break-word;\"\u003e\u003cp style=\"border-top:solid 1px #cccccc;font-size:1px;margin:0px auto;width:100%;\"\u003e\u003c/p\u003e\u003c!--[if mso | IE]\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" align=\"center\" width=\"550px\" style=\"border-top:solid 1px #cccccc;font-size:1px;margin:0px auto;width:550px;\"\u003e\u003ctr\u003e\u003ctd style=\"height:0;line-height:0;\"\u003e\u0026nbsp;\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e\u003c![endif]--\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/tbody\u003e\u003c/table\u003e\u003c/div\u003e\u003c!--[if mso | IE]\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e\u003c![endif]--\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/tbody\u003e\u003c/table\u003e\u003c/div\u003e\u003c!--[if mso | IE]\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e\u003c![endif]--\u003e\u003c!--[if mso | IE]\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" align=\"center\" width=\"600\" style=\"width:600px;\"\u003e\u003ctr\u003e\u003ctd style=\"line-height:0px;font-size:0px;mso-line-height-rule:exactly;\"\u003e\u003c![endif]--\u003e\u003cdiv style=\"margin:0px auto;max-width:600px;\"\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" align=\"center\" style=\"width:100%;\"\u003e\u003ctbody\u003e\u003ctr\u003e\u003ctd style=\"direction:ltr;font-size:0px;padding:0;text-align:center;\"\u003e\u003c!--[if mso | IE]\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\"\u003e\u003ctr\u003e\u003ctd style=\"vertical-align:top;width:600px;\"\u003e\u003c![endif]--\u003e\u003cdiv class=\"mj-outlook-group-fix mj-column-per-100\" style=\"font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;\"\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" width=\"100%\" style=\"vertical-align:top;\"\u003e\u003ctbody\u003e\u003ctr\u003e\u003ctd align=\"left\" style=\"font-size:0px;padding:10px 25px;word-break:break-word;\"\u003e\u003cdiv style=\"font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:13px;line-height:1;text-align:left;color:#000000;\"\u003e\u003ch3\u003e\u003cem\u003e...je saurai qu\u2019elle a exist\u00e9.\u003c/em\u003e\u003c/h3\u003e\u003c/div\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/tbody\u003e\u003c/table\u003e\u003c/div\u003e\u003c!--[if mso | IE]\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e\u003c![endif]--\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/tbody\u003e\u003c/table\u003e\u003c/div\u003e\u003c!--[if mso | IE]\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e\u003c![endif]--\u003e\u003c!--[if mso | IE]\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" align=\"center\" width=\"600\" style=\"width:600px;\"\u003e\u003ctr\u003e\u003ctd style=\"line-height:0px;font-size:0px;mso-line-height-rule:exactly;\"\u003e\u003c![endif]--\u003e\u003cdiv style=\"margin:0px auto;max-width:600px;\"\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" align=\"center\" style=\"width:100%;\"\u003e\u003ctbody\u003e\u003ctr\u003e\u003ctd style=\"direction:ltr;font-size:0px;padding:0;text-align:center;\"\u003e\u003c!--[if mso | IE]\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\"\u003e\u003ctr\u003e\u003ctd style=\"vertical-align:top;width:600px;\"\u003e\u003c![endif]--\u003e\u003cdiv class=\"mj-outlook-group-fix mj-column-per-100\" style=\"font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;\"\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" width=\"100%\" style=\"vertical-align:top;\"\u003e\u003ctbody\u003e\u003ctr\u003e\u003ctd align=\"left\" style=\"font-size:0px;padding:10px 25px;word-break:break-word;\"\u003e\u003cdiv style=\"font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:13px;line-height:1;text-align:left;color:#000000;\"\u003e\u003cstrong\u003eJe t\u2019\u00e9cris avec l\u2019innocence d\u2019un enfant,\u003c/strong\u003e\u003cbr /\u003e\n          comme on trace une \u00e9toile dans le sable,\u003cbr /\u003e\n          en esp\u00e9rant que la mer ne l\u2019efface pas tout de suite.\n        \u003c/div\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/tbody\u003e\u003c/table\u003e\u003c/div\u003e\u003c!--[if mso | IE]\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e\u003c![endif]--\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/tbody\u003e\u003c/table\u003e\u003c/div\u003e\u003c!--[if mso | IE]\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e\u003c![endif]--\u003e\u003c!--[if mso | IE]\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" align=\"center\" width=\"600\" style=\"width:600px;\"\u003e\u003ctr\u003e\u003ctd style=\"line-height:0px;font-size:0px;mso-line-height-rule:exactly;\"\u003e\u003c![endif]--\u003e\u003cdiv style=\"margin:0px auto;max-width:600px;\"\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" align=\"center\" style=\"width:100%;\"\u003e\u003ctbody\u003e\u003ctr\u003e\u003ctd style=\"direction:ltr;font-size:0px;padding:0;text-align:center;\"\u003e\u003c!--[if mso | IE]\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\"\u003e\u003ctr\u003e\u003ctd style=\"vertical-align:top;width:600px;\"\u003e\u003c![endif]--\u003e\u003cdiv class=\"mj-outlook-group-fix mj-column-per-100\" style=\"font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;\"\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" width=\"100%\" style=\"vertical-align:top;\"\u003e\u003ctbody\u003e\u003ctr\u003e\u003ctd align=\"left\" style=\"font-size:0px;padding:10px 25px;word-break:break-word;\"\u003e\u003cdiv style=\"font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:13px;font-style:italic;line-height:1;text-align:left;color:#555555;\"\u003e\n          \ud83d\udc8c \u003cem\u003eRe\u00e7ois cette lettre, non comme un appel, mais comme un \u00e9clat d\u2019\u00e9ternit\u00e9.\u003c/em\u003e\u003c/div\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/tbody\u003e\u003c/table\u003e\u003c/div\u003e\u003c!--[if mso | IE]\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e\u003c![endif]--\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/tbody\u003e\u003c/table\u003e\u003c/div\u003e\u003c!--[if mso | IE]\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e\u003c![endif]--\u003e\u003c!--[if mso | IE]\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" align=\"center\" width=\"600\" style=\"width:600px;\"\u003e\u003ctr\u003e\u003ctd style=\"line-height:0px;font-size:0px;mso-line-height-rule:exactly;\"\u003e\u003c![endif]--\u003e\u003cdiv style=\"margin:0px auto;max-width:600px;\"\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" align=\"center\" style=\"width:100%;\"\u003e\u003ctbody\u003e\u003ctr\u003e\u003ctd style=\"direction:ltr;font-size:0px;padding:0;text-align:center;\"\u003e\u003c!--[if mso | IE]\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\"\u003e\u003ctr\u003e\u003ctd style=\"vertical-align:top;width:600px;\"\u003e\u003c![endif]--\u003e\u003cdiv class=\"mj-outlook-group-fix mj-column-per-100\" style=\"font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;\"\u003e\u003ctable border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" width=\"100%\" style=\"vertical-align:top;\"\u003e\u003ctbody\u003e\u003ctr\u003e\u003ctd align=\"left\" style=\"font-size:0px;padding:10px 25px;word-break:break-word;\"\u003e\u003cdiv style=\"font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:13px;line-height:1;text-align:left;color:#000000;\"\u003e\u003cstrong\u003eTon aviateur du c\u0153ur,\u003c/strong\u003e\u003cbr /\u003e\u003cem\u003eL.\u003c/em\u003e\u003c/div\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/tbody\u003e\u003c/table\u003e\u003c/div\u003e\u003c!--[if mso | IE]\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e\u003c![endif]--\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/tbody\u003e\u003c/table\u003e\u003c/div\u003e\u003c!--[if mso | IE]\u003e\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e\u003c![endif]--\u003e\u003c/div\u003e\u003c/body\u003e\u003c/html\u003e";
+    const iframe = document.getElementById("preview-frame");
+    const wrapper = document.getElementById("device-wrapper");
+
+    // Charger une seule fois
+    iframe.srcdoc = htmlContent;
+
+    function setDevice(mode) {
+      const sizes = {
+        desktop: { width: "100%", height: "100%" },
+        iphone: { width: "390px", height: "844px" },
+        pixel: { width: "412px", height: "915px" },
+        ipad: { width: "768px", height: "1024px" }
+      };
+
+      const { width, height } = sizes[mode];
+      wrapper.style.width = width;
+      wrapper.style.height = height;
+    }
+
+    // Initialisation
+    setDevice('desktop');
+  </script>
+</body>
+</html>

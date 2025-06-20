@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Split View Highlight and Render</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/default.min.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: sans-serif;
+      display: flex;
+      height: 100vh;
+    }
+
+    .left-panel {
+      width: 33.33%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .top-left, .bottom-left {
+      flex: 1;
+      padding: 10px;
+      overflow: auto;
+      background: #f4f4f4;
+      border-bottom: 1px solid #ccc;
+    }
+
+    .bottom-left {
+      border-top: 1px solid #ccc;
+    }
+
+    .right-panel {
+      width: 66.66%;
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .render-container {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: auto;
+      background: #f9f9f9;
+    }
+
+    .device-wrapper {
+      background: #111;
+      padding: 12px;
+      border-radius: 20px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.3);
+    }
+
+    .device-frame {
+      border: none;
+      display: block;
+      border-radius: 8px;
+      background: white;
+      width: 100%;
+      height: 100%;
+    }
+
+    select {
+      font-size: 14px;
+      padding: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="left-panel">
+    <div class="top-left">
+      <pre><code class="language-markdown">{{ MD_CONTENT }}</code></pre>
+    </div>
+    <div class="bottom-left">
+      <pre><code class="language-html">{{ MJML_CONTENT }}</code></pre>
+    </div>
+  </div>
+  <div class="right-panel">
+    <div class="toolbar">
+      <label for="device-select">Device:</label>
+      <select id="device-select" onchange="setDevice(this.value)">
+        <option value="desktop">Desktop (100%)</option>
+        <option value="iphone">iPhone 14 (390×844)</option>
+        <option value="pixel">Pixel 7 (412×915)</option>
+        <option value="ipad">iPad (768×1024)</option>
+      </select>
+    </div>
+    <div class="render-container">
+      <div class="device-wrapper" id="device-wrapper">
+        <iframe id="preview-frame" class="device-frame"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+  <script>
+    hljs.highlightAll();
+
+    const htmlContent = {{ HTML_CONTENT | tojson | safe }};
+    const iframe = document.getElementById("preview-frame");
+    const wrapper = document.getElementById("device-wrapper");
+
+    // Charger une seule fois
+    iframe.srcdoc = htmlContent;
+
+    function setDevice(mode) {
+      const sizes = {
+        desktop: { width: "100%", height: "100%" },
+        iphone: { width: "390px", height: "844px" },
+        pixel: { width: "412px", height: "915px" },
+        ipad: { width: "768px", height: "1024px" }
+      };
+
+      const { width, height } = sizes[mode];
+      wrapper.style.width = width;
+      wrapper.style.height = height;
+    }
+
+    // Initialisation
+    setDevice('desktop');
+  </script>
+</body>
+</html>
