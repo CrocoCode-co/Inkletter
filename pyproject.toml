@@ -21,5 +21,10 @@ dependencies = [
 [project.scripts]
 inkletter = "inkletter.cli:cli"
 
+[project.urls]
+Homepage = "https://github.com/CrocoCode-co/Inkletter"
+Repository = "https://github.com/CrocoCode-co/Inkletter"
+Issues = "https://github.com/CrocoCode-co/Inkletter/issues"
+
 [tool.setuptools]
 packages = ["inkletter"]
