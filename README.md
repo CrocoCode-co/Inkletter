@@ -1,5 +1,9 @@
 # Inkletter
 
+[![GitHub Repo](https://img.shields.io/badge/GitHub-Inkletter-blue?logo=github)](https://github.com/CrocoCode-co/Inkletter)
+[![PyPI version](https://badge.fury.io/py/inkletter.svg)](https://badge.fury.io/py/inkletter)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 **Write your emails like prose, send them like a pro.**
 
 Inkletter is a magical little tool that transforms your plain Markdown files into beautiful, 
@@ -44,7 +48,7 @@ pip install inkletter
 Or for development:
 
 ```bash
-git clone https://github.com/your-name/inkletter.git
+git clone https://github.com/CrocoCode-co/Inkletter.git
 cd inkletter
 pip install -e .
 ```
