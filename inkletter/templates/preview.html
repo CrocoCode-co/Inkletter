@@ -50,7 +50,6 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      overflow: auto;
       background: #f9f9f9;
     }
 
@@ -82,7 +81,7 @@
       <pre><code class="language-markdown">{{ MD_CONTENT }}</code></pre>
     </div>
     <div class="bottom-left">
-      <pre><code class="language-html">{{ MJML_CONTENT }}</code></pre>
+      <pre><code class="language-html">{{ MJML_CONTENT |e }}</code></pre>
     </div>
   </div>
   <div class="right-panel">
