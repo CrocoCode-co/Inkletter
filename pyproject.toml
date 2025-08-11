@@ -27,4 +27,11 @@ Repository = "https://github.com/CrocoCode-co/Inkletter"
 Issues = "https://github.com/CrocoCode-co/Inkletter/issues"
 
 [tool.setuptools]
-packages = ["inkletter"]
+package-dir = { "" = "." }
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["inkletter*"]
+
+[tool.setuptools.package-data]
+inkletter = ["templates/**/*.html"]
